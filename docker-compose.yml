@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: pttcat
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: devpassword
+
+      #export POSTGRESQL_URL='postgres://admin:devpassword@localhost:5432/pttcat?sslmode=disable'
