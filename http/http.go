@@ -13,6 +13,7 @@ import (
 var addr = flag.String("addr", ":8080", "http service address")
 
 func InitHttpGate() {
+	flag.Parse()
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		println("ws endpoint")
 		connectWs(w, r)
