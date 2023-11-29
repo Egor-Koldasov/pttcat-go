@@ -1,0 +1,14 @@
+# cp /etc/systemd/system/
+
+[Unit]
+Description= instance to start TMC WS server
+After=network.target
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/
+Restart=on-failure
+RestartSec=1s
+ExecStart=/code/pttcat-go/main -addr ":80"
+[Install]
+WantedBy=multi-user.target
