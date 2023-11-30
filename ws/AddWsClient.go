@@ -13,8 +13,16 @@ type MessageJson struct {
 func sync(conn *websocket.Conn) {
 	state := db.GetState()
 	var stateJson map[string]interface{}
-	json.Unmarshal([]byte(state), &stateJson)
-	conn.WriteJSON(map[string]interface{}{"name": "sync", "state": stateJson})
+	error := json.Unmarshal([]byte(state), &stateJson)
+	if error != nil {
+		println("Error Unmarshal:", error)
+		return
+	}
+	error = conn.WriteJSON(map[string]interface{}{"name": "sync", "state": stateJson})
+	if error != nil {
+		println("Error WriteJSON:", error)
+		return
+	}
 }
 
 func AddWsClient(conn *websocket.Conn) {
